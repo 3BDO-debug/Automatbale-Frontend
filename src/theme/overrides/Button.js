@@ -22,7 +22,6 @@ export default function Button(theme) {
         },
         containedPrimary: {
           boxShadow: theme.customShadows.primary,
-          background: 'linear-gradient(45deg, #8B3DFF, #04BECF)',
         },
         containedSecondary: {
           boxShadow: theme.customShadows.secondary,
@@ -45,14 +44,6 @@ export default function Button(theme) {
           '&:hover': {
             backgroundColor: theme.palette.action.hover,
           },
-        },
-        outlinedSecondary: {
-          background: 'linear-gradient(45deg,#8b3dff, #00c4cc)',
-          backgroundClip: 'text',
-          WebkitTextFillColor: 'transparent',
-          display: 'inline-block',
-          WebkitBackgroundClip: 'text',
-          textTransform: 'capitalize',
         },
         textInherit: {
           '&:hover': {

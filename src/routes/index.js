@@ -1,5 +1,7 @@
 import { Suspense, lazy } from "react";
 import { Navigate, useRoutes, useLocation } from "react-router-dom";
+import LayoutGenerator from "src/layouts";
+import DashboardLayout from "src/layouts/dashboard";
 import LogoOnlyLayout from "src/layouts/LogoOnlyLayout";
 // layouts
 
@@ -24,13 +26,23 @@ const Loadable = (Component) => (props) => {
 export default function Router() {
   return useRoutes([
     {
-      path: "/home",
-      element: <HomePage />,
+      path: "/dashboard",
+      element: <LayoutGenerator />,
+      children: [
+        { path: "home", element: <HomePage /> },
+        { path: "clients-data", element: <ClientsDataPage /> },
+      ],
     },
     {
       path: "/auth",
       element: <LogoOnlyLayout />,
-      children: [{ path: "signin", element: <SignInPage /> }],
+      children: [
+        { path: "signin", element: <SignInPage /> },
+        {
+          path: "forgetpassword", element: <ForgetPassword />
+      
+        },
+      ],
     },
     {
       path: "*",
@@ -46,5 +58,11 @@ export default function Router() {
 
 // Dashboard
 const HomePage = Loadable(lazy(() => import("../pages/HomePage")));
+const ClientsDataPage = Loadable(
+  lazy(() => import("../pages/ClientsDataPage"))
+);
 const SignInPage = Loadable(lazy(() => import("../pages/authPages/SignIn")));
+const ForgetPassword = Loadable(
+  lazy(() => import("../pages/authPages/ForgetPassword"))
+);
 const NotFound = Loadable(lazy(() => import("../pages/Page404")));
